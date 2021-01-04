@@ -49,7 +49,6 @@ function LoginPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-  console.log("process.env.REACT_APP_BACKEND", process.env.REACT_APP_BACKEND)
 
   var handleSubmitSignIn = async () => {
  

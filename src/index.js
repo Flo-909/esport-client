@@ -90,6 +90,8 @@ const store = createStore(combineReducers({ token, campaign }))
 
 // }
 
+console.log("process.env.REACT_APP_BACKEND", process.env.REACT_APP_BACKEND)
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hist}>

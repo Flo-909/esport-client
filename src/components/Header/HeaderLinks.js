@@ -26,35 +26,38 @@ export default function HeaderLinks(props) {
     <List className={classes.list}>
 
       <ListItem className={classes.listItem}>
+      <Link to="/sign-up/brand" style={{color: "black"}}>
         <Button
-          href="/sign-up/brand"
           color="primary"
           border
           className={classes.navLink}
         >
           <PersonAddIcon className={classes.icons} /> Sign-Up as a Company
         </Button>
+        </Link>
       </ListItem>
 
       <ListItem className={classes.listItem}>
+      <Link to="/sign-up/influencer" style={{color: "black"}}>
         <Button
-          href="/sign-up/influencer"
           color="primary"
           border
           className={classes.navLink}
         >
           <PersonAddIcon className={classes.icons} /> Sign-Up as an Influencer
         </Button>
+        </Link>
       </ListItem>
 
       <ListItem className={classes.listItem}>
-        <Button 
-          href="/login-page"
-          color="primary"
-          className={classes.navLink}
-        >
-          <PersonIcon className={classes.icons} /> Login
+        <Link to="/login-page" style={{color: "black"}}>
+          <Button
+            color="primary"
+            className={classes.navLink}
+          >
+            <PersonIcon className={classes.icons} /> Login
         </Button>
+        </Link>
       </ListItem>
 
     </List>

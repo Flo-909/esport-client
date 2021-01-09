@@ -82,12 +82,10 @@ const store = createStore(combineReducers({ token, campaign }))
 
 {/* <Route path="/select-campaign" exact component={SelectCampagne} /> */ }
 
-
 {/* <Route path="/" exact component={LandingPage} /> */ }
 {/* <Route path="/login-page" exact component={LoginPage} /> */ }
 //     </Switch> 
 //              )} 
-
 // }
 
 console.log("process.env.REACT_APP_BACKEND", process.env.REACT_APP_BACKEND)

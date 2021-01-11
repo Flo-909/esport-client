@@ -3,47 +3,28 @@ import React, {useState, useEffect} from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
 // @material-ui/icons
 import InfoIcon from '@material-ui/icons/Info';
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import FolderIcon from '@material-ui/icons/Folder';
-
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import TextField from '@material-ui/core/TextField';
 import HeaderLinksBrand from "components/Header/HeaderLinksBrand";
-
-
 import { connect } from 'react-redux'
-
 import profile from "assets/img/logo-company.png";
-
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-
 import "./App.css"
 
 
-
-
 function ProfileBrandPage(props) {
-
-
-
-
-  console.log('TOKEN BABY', props)
-
-  const [companyDetails, setCompanyDetails] = useState([])
-
-
+ const [companyDetails, setCompanyDetails] = useState([])
 
   useEffect(() => {
     async function fetchData() {
@@ -65,8 +46,6 @@ function ProfileBrandPage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-  
-  
   return (
     <div>
       <Header
@@ -141,16 +120,8 @@ function ProfileBrandPage(props) {
 
                           <GridItem xs={12}>
                           <TextField color="primary" disabled id="standard-disabled" label={companyDetails.email}/>
-                          </GridItem>
-                         
-
-
-                          
+                          </GridItem>                          
                         </GridContainer>
-
-                        
-                        
-
                       )
                     },
                     {
@@ -164,9 +135,7 @@ function ProfileBrandPage(props) {
                               src={"https://pbs.twimg.com/media/CWH5mtYXAAImgdt.jpg"}
                               className={navImageClasses}
                             />
-
-                          </GridItem>
-                          
+                          </GridItem>                          
                         </GridContainer>
                       )
                     },
@@ -181,7 +150,6 @@ function ProfileBrandPage(props) {
                               src={"https://esports-marketing-blog.com/wp-content/uploads/esport-sponsoring-coca-cola-league-of-legends-riot-games.jpg"}
                               className={navImageClasses}
                             />
-
                           </GridItem>
 
                           <GridItem xs={12}>
@@ -190,19 +158,14 @@ function ProfileBrandPage(props) {
                               src={"https://www.influenth.com/wp-content/uploads/2016/10/coca-cola-gaming-awards-youtube-influenth.jpg"}
                               className={navImageClasses}
                             />
-
-                          </GridItem>
-                          
+                          </GridItem>                        
                           <GridItem xs={12}>
                             <img
                               alt="endedCampaign1"
                               src={"https://esports.com.vn/wp-content/uploads/2019/08/works-02.jpg"}
                               className={navImageClasses}
                             />
-
                           </GridItem>
-                          
-                          
                         </GridContainer>
                       )
                     }
@@ -216,9 +179,7 @@ function ProfileBrandPage(props) {
       <Footer />
     </div>
   );
-
 }
-
 
 function mapStateToProps(state) {
   return { token: state.token }

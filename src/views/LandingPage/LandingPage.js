@@ -15,15 +15,12 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
-
 // Sections for this page
 import ProductSection from "./Sections/ProductSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
 const dashboardRoutes = []; 
-
 const useStyles = makeStyles(styles);
 
 export default function LandingPage(props) {
@@ -70,7 +67,6 @@ export default function LandingPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
           <ProductSection />
-          {/* <TeamSection /> */}
           <WorkSection />
         </div>
       </div>

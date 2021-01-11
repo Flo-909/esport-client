@@ -140,17 +140,12 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
       classes.imgRoundedCircle,
       classes.imgFluid
     );
-    
-      
-  
+     
 // Elements à garder
-
 {/* key={params.id}>
 {campaignDetails.campaignName}
     <Button onClick={() =>applyCampaign()} color="primary">Apply Campaign</Button>
  */}
-
-
     const campaignReturn = (
 
       <div >
@@ -210,10 +205,7 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
                     {
                       tabButton: "Description",
                       tabIcon: InfoIcon,
-
                       tabContent: (
-
-
                         <div className={classes.description} justify="center" style={{marginTop: '100px'}}>
                         <h8>
                         {campaignDetails.description}
@@ -326,12 +318,9 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
     return campaignDetails ? campaignReturn : <p>Loading</p>
     }
     
-
-
 function mapStateToProps(state) {
     return { token: state.token }
 }
-
 
  export default connect(
     mapStateToProps,

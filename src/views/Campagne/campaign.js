@@ -7,10 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import {faStar} from '@fortawesome/free-solid-svg-icons'
-
-
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -26,9 +22,6 @@ const useStyles = makeStyles({
 function Campaign(props) {
 
   const classes = useStyles();
-
-
-
   return (
     <Card className={classes.root} style={{backgroundColor: 'transparent', display:'flex', justifyContent:'space-between', flexDirection:'column'}}>
       <CardMedia
@@ -45,14 +38,7 @@ function Campaign(props) {
           </CardContent>
       <Link to = {`/campaign-apply/${props.campaignId}`}><Button color="primary">Select Campaign</Button></Link>
     </Card>
-
-
   );
 }
 
 export default Campaign;
-
-
-
-
-

@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-
 // core components
 import Button from "components/CustomButtons/Button.js";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import HeaderLinksBrand from "components/Header/HeaderLinksBrand.js";
-
 import Grid from '@material-ui/core/Grid';
 import GridContainer from "components/Grid/GridContainer.js";
 import ButtonBase from '@material-ui/core/ButtonBase';
-
 import image from "assets/img/signup.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import "views/MessengerPage/App.css"
-
-
-
 
 function ChoiceInfluencer(props) {
   const [returnCampaignDetailList, setReturnCampaignDetailList] = useState([])
@@ -52,17 +44,11 @@ function ChoiceInfluencer(props) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `token=${props.token}`
     })
-
-
   }
-
   const updateStatusRef = async () => {
-
-
     var UpdateStatusRefused = { ...returnCampaignDetailList }
     UpdateStatusRefused.status = 'Refused'
     console.log(UpdateStatusRefused)
-
     setReturnCampaignDetailList(UpdateStatusRefused)
 
     const data = await fetch(process.env.REACT_APP_BACKEND + '/update-request-ref', {
@@ -70,10 +56,7 @@ function ChoiceInfluencer(props) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `token=${props.token}`
     })
-
-
   }
-
   const gridStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -230,11 +213,8 @@ function ChoiceInfluencer(props) {
 
                   </div>
                 </div>
-
               </ul>
-
             </div>
-
           </div>
         </div>
       </div>
@@ -264,49 +244,30 @@ function ChoiceInfluencer(props) {
           minHeight: '100vh',
         }}
       >
-
         <div className="users" key={props.token}>
-
           <div className="current-user-container" style={{ marginTop: "85px" }}>
-
             <div>
-
               <div className="current-user-info">
-
                 <h3>{returnCampaignDetailList.campaignName}</h3>
-
               </div>
             </div>
-
           </div>
-
           <div className="users-container" style={{ marginTop: "280px" }}>
-
             <ul>
-
               <li className="user">
-              
-
                 <div className="user-info-container">
-
                   <div className="user-info">
-
                     <h4>Firstname Influencer: {returnInfluenceur.firstName}</h4>
                     <p>Status: {returnCampaignDetailList.status}</p>
                     <p>Followers: {returnInfluenceur.numberFollower}</p>
-
                   </div>
-
                 </div>
-
               </li>
-
               <div className={classes.description}>
                 <p>
                   {returnInfluenceur.description}
             </p>
               </div>
-
               <div>
                 <div>
                   <GridContainer justify="left">
@@ -345,19 +306,13 @@ function ChoiceInfluencer(props) {
                       <img className={gridClasses.img} src={"https://static-cdn.jtvnw.net/ttv-boxart/FIFA%2021-285x380.jpg"} width='35%' />
                     </Grid>
                   </GridContainer>
-
                 </div>
               </div>
-
             </ul>
-
           </div>
-
         </div>
       </div>
     </div>
-
-
   } else {
     return <div>
       <Header
@@ -381,53 +336,33 @@ function ChoiceInfluencer(props) {
           minHeight: '100vh',
         }}
       >
-
         <div className="users" key={props.token}>
 
           <div className="current-user-container" style={{ marginTop: "85px" }}>
-
             <div>
-
               <picture className="current-user-picture">
                 <img alt={"brand"} src={returnCampaignDetailList.uploadedDoc} />
               </picture>
-
               <div className="current-user-info">
-
                 <h3>{returnCampaignDetailList.campaignName}</h3>
-
               </div>
             </div>
-
           </div>
-
           <div className="users-container" style={{ marginTop: "280px" }}>
-
             <ul>
-
               <li className="user">
-
                 <div className="user-info-container">
-
                   <h3>No request</h3>
-
                 </div>
-
               </li>
-
             </ul>
-
           </div>
-
         </div>
       </div>
     </div>
 
   }
-
 }
-
-
 function mapStateToProps(state) {
   return { token: state.token }
 }

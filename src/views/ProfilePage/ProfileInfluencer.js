@@ -1,49 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-// nodejs library that concatenates classes
 import classNames from "classnames";
-// @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
-// @material-ui/icons
 import InfoIcon from '@material-ui/icons/Info';
 import Favorite from "@material-ui/icons/Favorite";
 import WorkIcon from '@material-ui/icons/Work';
-
-// core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import TextField from '@material-ui/core/TextField';
 import HeaderLinksInfluencer from "components/Header/HeaderLinksInfluencer";
-
-
 import profile from "assets/img/faces/christian.jpg";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { connect } from 'react-redux'
-
 import "./App.css"
-import { green } from "@material-ui/core/colors";
-
-
-
-
-
-
 
 function ProfilePage(props) {
 
   const useStyles = makeStyles(styles);
-
   console.log('TOKEN BABY', props)
-
   const [influencerDetails, setInfluencerDetails] = useState([])
 
   useEffect(() => {
@@ -56,11 +35,6 @@ function ProfilePage(props) {
     fetchData()
   }, [])
 
-
-
-
-
-
   const classes = useStyles();
   const { ...rest } = props;
   const imageClasses = classNames(
@@ -69,8 +43,6 @@ function ProfilePage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-
-
 
   return (
 
@@ -127,9 +99,7 @@ function ProfilePage(props) {
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-              
                 <NavPills 
-               
                   alignCenter
                   color="primary"
                   tabs={[
@@ -145,30 +115,19 @@ function ProfilePage(props) {
                           <GridItem xs={12}>
                           <TextField color="primary" disabled id="standard-disabled" label={influencerDetails.lastName}/>
                           </GridItem>
-
                           <GridItem xs={12}>
                           <TextField color="primary" disabled id="standard-disabled" label={influencerDetails.phone}/>
-
                           </GridItem>
-
                           <GridItem xs={12}>
                           <TextField color="primary" disabled id="standard-disabled" label={influencerDetails.email}/>
                           </GridItem>
-
-
                           <GridItem xs={12}>
                           <TextField color="primary" disabled id="standard-disabled" label={influencerDetails.numberFollower}/>
                           </GridItem>
                           <GridItem xs={12}>
                           <TextField color="primary" disabled id="standard-disabled" label={influencerDetails.favoriteGame}/>
                           </GridItem>
-
-                          
-
                         </GridContainer>
-
-
-
                       )
                     },
                   
@@ -193,7 +152,6 @@ function ProfilePage(props) {
                               src={"https://www.stevenagefc.com/siteassets/image/burger-king-stevenage-challenge/stevenage-pr.jpg/Large"}
                               className={navImageClasses}
                             />
-
                           </GridItem>
 
                           <GridItem xs={12}>
@@ -202,7 +160,6 @@ function ProfilePage(props) {
                               src={"https://images.contentstack.io/v3/assets/bltad9188aa9a70543a/bltf5e67a12a9bcabc8/5f6be4ec5e85ad4dee1914be/20200923_Axe_Worlds_1600x900.jpg?width=3200&height=1800"}
                               className={navImageClasses}
                             />
-
                           </GridItem>
 
                         </GridContainer>
@@ -220,10 +177,7 @@ function ProfilePage(props) {
                               className={navImageClasses}
                             />
                             <h7>League of Legends</h7>
-
                           </GridItem>
-
-
                           <GridItem xs={12} lg={6}>
                             <img
                               alt="game2"
@@ -231,9 +185,7 @@ function ProfilePage(props) {
                               className={navImageClasses}
                             />
                             <h7>Call of Duty: Warzone</h7>
-
                           </GridItem>
-
                           <GridItem xs={12} lg={6}>
                             <img
                               alt="game3"
@@ -241,9 +193,7 @@ function ProfilePage(props) {
                               className={navImageClasses}
                             />
                             <h7>Fifa 21</h7>
-
                           </GridItem>
-
                           <GridItem xs={12} lg={6}>
                             <img
                               alt="game4"
@@ -251,9 +201,7 @@ function ProfilePage(props) {
                               className={navImageClasses}
                             />
                             <h7>Rocket League</h7>
-
                           </GridItem>
-
                           <GridItem xs={12} lg={6}>
                             <img
                               alt="game5"
@@ -261,16 +209,13 @@ function ProfilePage(props) {
                               className={navImageClasses}
                             />
                             <h7>NBA 2K21</h7>
-
                           </GridItem>
-
                         </GridContainer>
                       )
                     }
                   ]}
                 
                 />
-             
               </GridItem>
             </GridContainer>
           </div>
@@ -278,9 +223,7 @@ function ProfilePage(props) {
       </div>
       <Footer />
     </div>
-
   );
-
 }
 
 function mapStateToProps(state) {

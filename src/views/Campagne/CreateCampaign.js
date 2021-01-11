@@ -116,7 +116,6 @@ function CreateCampaign(props) {
     } else { setRedirect(false)
     }
   }
-  
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -173,10 +172,6 @@ function CreateCampaign(props) {
     setAudienceMax(event.target.value);
   };
 
-
-  console.log(uploadDoc);
-  console.log("redirect", redirect);
-
   return (
     <div>
       <Header
@@ -208,7 +203,6 @@ function CreateCampaign(props) {
                     <h2 className={classes.title}>Create your Campaign</h2>
                   </CardHeader>
                   <CardBody>
-
                     <CustomInput inputProps={{ onChange: (e) => setNameCampaign(e.target.value), }}
                       labelText="Campaign name"
                       id="nameCampaign"
@@ -216,8 +210,6 @@ function CreateCampaign(props) {
                         fullWidth: true
                       }}
                     />
-
-                    {/* Penser à mettre au format FR et à créer des conditions pour ne pas pouvoir mettre anterieur.  */}
                     <div>
                       <MuiPickersUtilsProvider utils={DateFnsUtils} >
                         <Grid container justify="space-around">
@@ -300,17 +292,13 @@ function CreateCampaign(props) {
                           ))}
                         </TextField>
                         </div>
-               
                       </form>
                       </Grid>
                     </div>
-
                     <div className={classes.root} style={{ marginTop: '80px' }}
                     >{"Share your campaign files"}
                     </div>
-
                     <div className={themeClasses.root} style={{ marginBottom: '80px' }}>
-
                       <input 
                       onChange ={(e) => console.log(e.target)}
                         accept="image/*"
@@ -327,7 +315,6 @@ function CreateCampaign(props) {
                       </label>
                     </div>
                   </CardBody>
-
                   <CardFooter className={classes.cardFooter}>
                     <Button onClick={() => handleSubmitCampaign()} color="primary" size="lg">
                       Confirm
@@ -341,8 +328,6 @@ function CreateCampaign(props) {
       </div>
       {redirect ? <Redirect to="/mycampaign" /> : null }
     </div>
-
-
   );
 }
 

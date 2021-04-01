@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -16,7 +16,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import CardHeader from "components/Card/CardHeader";
 
@@ -25,82 +25,89 @@ import { ThemeProvider } from "@material-ui/styles";
 
 import image from "assets/img/signup.jpg";
 
-import { connect } from 'react-redux'
-
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(styles);
 
 const themeStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
     },
-    '& .MuiTextField-root': {
+    "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: "25ch",
     },
-    '& label.Mui-focused': {
-      color: 'green',
+    "& label.Mui-focused": {
+      color: "green",
     },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: 'green',
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "green",
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'white',
-        width: '385px'
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+        width: "385px",
       },
-      '&:hover fieldset': {
-        borderColor: 'purple',
+      "&:hover fieldset": {
+        borderColor: "purple",
       },
-      '&.Mui-focused fieldset': {
-        borderColor: 'purple',
+      "&.Mui-focused fieldset": {
+        borderColor: "purple",
       },
-    }
+    },
   },
 }));
 
 function SignUpInfluencer(props) {
+  // GLOBAL STATE
+  const [signUpFirstName, setSignUpFirstName] = useState("");
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
+  const [signUpLastName, setSignUpLastName] = useState("");
+  const [signUpPhone, setSignUpPhone] = useState("");
+  const [signUpUserNameInfluencer, setSignUpUserNameInfluencer] = useState("");
+  const [signUpFollowerInfluencer, setSignUpFollowerInfluencer] = useState("");
+  const [
+    signUpFavoriteGamesInfluencer,
+    setSignUpFavoriteGamesInfluencer,
+  ] = useState("");
+  const [
+    signUpUrlSocialNetworkInfluencer,
+    setSignUpUrlSocialNetworkInfluencer,
+  ] = useState("");
+  const [bioInfluencer, setBioInfluencer] = useState("");
+  const [listErrorsSignup, setErrorsSignup] = useState([]);
+  const [userExists, setUserExists] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
-  // GLOBAL STATE 
-  const [signUpFirstName, setSignUpFirstName] = useState('')
-  const [signUpEmail, setSignUpEmail] = useState('')
-  const [signUpPassword, setSignUpPassword] = useState('')
-  const [signUpLastName, setSignUpLastName] = useState('')
-  const [signUpPhone, setSignUpPhone] = useState('')
-  const [signUpUserNameInfluencer, setSignUpUserNameInfluencer] = useState('')
-  const [signUpFollowerInfluencer, setSignUpFollowerInfluencer] = useState('')
-  const [signUpFavoriteGamesInfluencer, setSignUpFavoriteGamesInfluencer] = useState('')
-  const [signUpUrlSocialNetworkInfluencer, setSignUpUrlSocialNetworkInfluencer] = useState('')
-  const [bioInfluencer, setBioInfluencer]= useState('')
-  const [listErrorsSignup, setErrorsSignup] = useState([])
-  const [userExists, setUserExists] = useState(false)
-  const [redirect, setRedirect] = useState(false)
+  const handleSubmitSignupInfluencer = async () => {
+    console.log("HELLO WORLD");
 
-  var handleSubmitSignupInfluencer = async () => {
-    console.log("HELLO WORLD")
+    const data = await fetch(
+      process.env.REACT_APP_BACKEND + "/sign-up/influencer",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `userNameFromFront=${signUpUserNameInfluencer}&firstNameFromFront=${signUpFirstName}&lastNameFromFront=${signUpLastName}&emailFromFront=${signUpEmail}&bioFromFront=${bioInfluencer}&phoneFromFront=${signUpPhone}&passwordFromFront=${signUpPassword}&numberFollowerFromFront=${signUpFollowerInfluencer}&favoriteGameFromFront=${signUpFavoriteGamesInfluencer}&urlSocialNetworkFromFront=${signUpUrlSocialNetworkInfluencer}`,
+      }
+    );
+    console.log(data.body + "HELLO WORLD");
 
-    const data = await fetch(process.env.REACT_APP_BACKEND + '/sign-up/influencer', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `userNameFromFront=${signUpUserNameInfluencer}&firstNameFromFront=${signUpFirstName}&lastNameFromFront=${signUpLastName}&emailFromFront=${signUpEmail}&bioFromFront=${bioInfluencer}&phoneFromFront=${signUpPhone}&passwordFromFront=${signUpPassword}&numberFollowerFromFront=${signUpFollowerInfluencer}&favoriteGameFromFront=${signUpFavoriteGamesInfluencer}&urlSocialNetworkFromFront=${signUpUrlSocialNetworkInfluencer}`
-    })
-    console.log(data.body + "HELLO WORLD")
-
-    const body = await data.json()
+    const body = await data.json();
 
     if (body.result == true) {
-      props.addToken(body.token)
-      setUserExists(true)
-      setRedirect(true)
+      props.addToken(body.token);
+      setUserExists(true);
+      setRedirect(true);
     } else {
-      setErrorsSignup(body.error)
+      setErrorsSignup(body.error);
     }
-  }
- 
-  var tabErrorsSignup = listErrorsSignup.map((error,i) => {
-    return(<p>{error}</p>)
-  })
+  };
+
+  const tabErrorsSignup = listErrorsSignup.map((error, i) => {
+    return <p>{error}</p>;
+  });
 
   const themeClasses = themeStyles();
 
@@ -120,7 +127,7 @@ function SignUpInfluencer(props) {
         fixed
         changeColorOnScroll={{
           height: 100,
-          color: "dark"
+          color: "dark",
         }}
         {...rest}
       />
@@ -129,41 +136,41 @@ function SignUpInfluencer(props) {
         style={{
           backgroundImage: "url(" + image + ")",
           backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundPosition: "top center",
         }}
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-
             <GridItem xs={6} sm={6} md={6} style={{ display: "flex" }}>
-              <Card className={classes[cardAnimaton]} style={{ backgroundColor: "transparent", color: "white" }}>
+              <Card
+                className={classes[cardAnimaton]}
+                style={{ backgroundColor: "transparent", color: "white" }}
+              >
                 <form className={classes.form}>
                   <CardHeader className={classes.CardHeader}>
                     <h2 className={classes.title}>Sign-up Influencer</h2>
                   </CardHeader>
                   <CardBody>
-
                     <CustomInput
                       inputProps={{
-                        onChange: (e) => setSignUpUserNameInfluencer(e.target.value)
+                        onChange: (e) =>
+                          setSignUpUserNameInfluencer(e.target.value),
                       }}
                       labelText="Username*"
                       id="Username"
-
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
 
                     <CustomInput
                       inputProps={{
-                        onChange: (e) => setSignUpFirstName(e.target.value)
+                        onChange: (e) => setSignUpFirstName(e.target.value),
                       }}
                       labelText="Firstname*"
                       id="firstname"
-
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
 
@@ -173,35 +180,32 @@ function SignUpInfluencer(props) {
                       }}
                       labelText="Lastname*"
                       id="lastName"
-
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
 
                     <CustomInput
                       inputProps={{
                         onChange: (e) => setSignUpPassword(e.target.value),
-                        type: 'password'
+                        type: "password",
                       }}
                       labelText="Password*"
                       id="password"
-
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
 
-                      <CustomInput
+                    <CustomInput
                       inputProps={{
                         onChange: (e) => setSignUpEmail(e.target.value),
-                        type:'email'
-
+                        type: "email",
                       }}
                       labelText="Email*"
                       id="email"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
 
@@ -211,16 +215,20 @@ function SignUpInfluencer(props) {
                       }}
                       labelText="Phone*"
                       id="phone"
-
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
-                    <form className={themeClasses.root} noValidate autoComplete="off">
-                     <TextField style={{marginRight:"60px"}}
-                      inputProps={{
-                        onChange:(e) => setBioInfluencer(e.target.value)
-                      }}
+                    <form
+                      className={themeClasses.root}
+                      noValidate
+                      autoComplete="off"
+                    >
+                      <TextField
+                        style={{ marginRight: "60px" }}
+                        inputProps={{
+                          onChange: (e) => setBioInfluencer(e.target.value),
+                        }}
                         id="outlined-multiline-static"
                         label="Biography"
                         multiline
@@ -230,45 +238,50 @@ function SignUpInfluencer(props) {
                     </form>
                     <CustomInput
                       inputProps={{
-                        onChange: (e) => setSignUpFollowerInfluencer(e.target.value),
+                        onChange: (e) =>
+                          setSignUpFollowerInfluencer(e.target.value),
                       }}
                       labelText="Number of followers* ( Number only)"
                       id="followers"
-
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
 
                     <CustomInput
                       inputProps={{
-                        onChange: (e) => setSignUpFavoriteGamesInfluencer(e.target.value),
+                        onChange: (e) =>
+                          setSignUpFavoriteGamesInfluencer(e.target.value),
                       }}
                       labelText="Favorite games"
                       id="games"
-
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
 
                     <CustomInput
                       inputProps={{
-                        onChange: (e) => setSignUpUrlSocialNetworkInfluencer(e.target.value),
+                        onChange: (e) =>
+                          setSignUpUrlSocialNetworkInfluencer(e.target.value),
                       }}
                       labelText="URL Social Network "
                       id="Social Network"
-
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
                     {tabErrorsSignup}
                   </CardBody>
 
                   <CardFooter className={classes.cardFooter}>
-                    <Button onClick={() => handleSubmitSignupInfluencer()} variant="contained" color="primary" size="lg">
-                    Sign up
+                    <Button
+                      onClick={() => handleSubmitSignupInfluencer()}
+                      variant="contained"
+                      color="primary"
+                      size="lg"
+                    >
+                      Sign up
                     </Button>
                   </CardFooter>
                 </form>
@@ -276,24 +289,18 @@ function SignUpInfluencer(props) {
             </GridItem>
           </GridContainer>
         </div>
-
       </div>
-      {redirect ? <Redirect to="/select-campaign" /> : null}
+      {redirect ? <Redirect to="/request-influencer-list" /> : null}
     </div>
-
-
   );
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     addToken: function (token) {
-      dispatch({ type: 'addToken', token: token })
-    }
-  }
+      dispatch({ type: "addToken", token: token });
+    },
+  };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignUpInfluencer)
+export default connect(null, mapDispatchToProps)(SignUpInfluencer);

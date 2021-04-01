@@ -44,7 +44,7 @@ function RequestInfluencer(props) {
       const classes = useStyles();
       const { ...rest } = props;
 
-      if(returnCampaignDetailList.status == 'Waiting' || 'Accepted'|| 'Refused'){
+      if(returnCampaignDetailList.status === 'Waiting' || 'Accepted'|| 'Refused'){
         return<div>
         <Header
           color="transparent"

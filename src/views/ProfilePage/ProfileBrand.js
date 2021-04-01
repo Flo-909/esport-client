@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
-import InfoIcon from '@material-ui/icons/Info';
+import InfoIcon from "@material-ui/icons/Info";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import FolderIcon from '@material-ui/icons/Folder';
+import FolderIcon from "@material-ui/icons/Folder";
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -15,26 +15,28 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 import HeaderLinksBrand from "components/Header/HeaderLinksBrand";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import profile from "assets/img/logo-company.png";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import "./App.css"
-
+import "./App.css";
 
 function ProfileBrandPage(props) {
- const [companyDetails, setCompanyDetails] = useState([])
+  const [companyDetails, setCompanyDetails] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(process.env.REACT_APP_BACKEND + `/branddetails?brandToken=${props.token}`)
-      const jsonResponse = await response.json()
+      const response = await fetch(
+        process.env.REACT_APP_BACKEND +
+          `/branddetails?brandToken=${props.token}`
+      );
+      const jsonResponse = await response.json();
 
-      setCompanyDetails(jsonResponse.brandProfil)
+      setCompanyDetails(jsonResponse.brandProfil);
     }
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const useStyles = makeStyles(styles);
   const classes = useStyles();
@@ -55,7 +57,7 @@ function ProfileBrandPage(props) {
         fixed
         changeColorOnScroll={{
           height: 200,
-          color: "dark"
+          color: "dark",
         }}
         {...rest}
       />
@@ -90,9 +92,7 @@ function ProfileBrandPage(props) {
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <h8>
-              {companyDetails.bio}
-              </h8>
+              <h8>{companyDetails.bio}</h8>
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
@@ -104,25 +104,41 @@ function ProfileBrandPage(props) {
                       tabButton: "Infos",
                       tabIcon: InfoIcon,
                       tabContent: (
-                      
-                        
                         <GridContainer justify="center" direction="column">
-                          <GridItem xs={12}> 
-                          <TextField color="primary"  label={companyDetails.firstName}/>
+                          <GridItem xs={12}>
+                            <TextField
+                              color="primary"
+                              label={companyDetails.firstName}
+                            />
                           </GridItem>
                           <GridItem xs={12}>
-                          <TextField color="primary" disabled id="standard-disabled" label={companyDetails.lastName}/>
+                            <TextField
+                              color="primary"
+                              disabled
+                              id="standard-disabled"
+                              label={companyDetails.lastName}
+                            />
                           </GridItem>
 
                           <GridItem xs={12}>
-                          <TextField color="primary" disabled id="standard-disabled" label={companyDetails.phone}/>
+                            <TextField
+                              color="primary"
+                              disabled
+                              id="standard-disabled"
+                              label={companyDetails.phone}
+                            />
                           </GridItem>
 
                           <GridItem xs={12}>
-                          <TextField color="primary" disabled id="standard-disabled" label={companyDetails.email}/>
-                          </GridItem>                          
+                            <TextField
+                              color="primary"
+                              disabled
+                              id="standard-disabled"
+                              label={companyDetails.email}
+                            />
+                          </GridItem>
                         </GridContainer>
-                      )
+                      ),
                     },
                     {
                       tabButton: "Current Campaign",
@@ -132,12 +148,14 @@ function ProfileBrandPage(props) {
                           <GridItem xs={12}>
                             <img
                               alt="currentCampaign1"
-                              src={"https://pbs.twimg.com/media/CWH5mtYXAAImgdt.jpg"}
+                              src={
+                                "https://pbs.twimg.com/media/CWH5mtYXAAImgdt.jpg"
+                              }
                               className={navImageClasses}
                             />
-                          </GridItem>                          
+                          </GridItem>
                         </GridContainer>
-                      )
+                      ),
                     },
                     {
                       tabButton: "Ended Campaign",
@@ -147,7 +165,9 @@ function ProfileBrandPage(props) {
                           <GridItem xs={12}>
                             <img
                               alt="endedCampaign1"
-                              src={"https://esports-marketing-blog.com/wp-content/uploads/esport-sponsoring-coca-cola-league-of-legends-riot-games.jpg"}
+                              src={
+                                "https://esports-marketing-blog.com/wp-content/uploads/esport-sponsoring-coca-cola-league-of-legends-riot-games.jpg"
+                              }
                               className={navImageClasses}
                             />
                           </GridItem>
@@ -155,20 +175,24 @@ function ProfileBrandPage(props) {
                           <GridItem xs={12}>
                             <img
                               alt="endedCampaign1"
-                              src={"https://www.influenth.com/wp-content/uploads/2016/10/coca-cola-gaming-awards-youtube-influenth.jpg"}
+                              src={
+                                "https://www.influenth.com/wp-content/uploads/2016/10/coca-cola-gaming-awards-youtube-influenth.jpg"
+                              }
                               className={navImageClasses}
                             />
-                          </GridItem>                        
+                          </GridItem>
                           <GridItem xs={12}>
                             <img
                               alt="endedCampaign1"
-                              src={"https://esports.com.vn/wp-content/uploads/2019/08/works-02.jpg"}
+                              src={
+                                "https://esports.com.vn/wp-content/uploads/2019/08/works-02.jpg"
+                              }
                               className={navImageClasses}
                             />
                           </GridItem>
                         </GridContainer>
-                      )
-                    }
+                      ),
+                    },
                   ]}
                 />
               </GridItem>
@@ -182,10 +206,7 @@ function ProfileBrandPage(props) {
 }
 
 function mapStateToProps(state) {
-  return { token: state.token }
+  return { token: state.token };
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(ProfileBrandPage)
+export default connect(mapStateToProps, null)(ProfileBrandPage);

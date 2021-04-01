@@ -94,6 +94,7 @@ function ChoiceInfluencer(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
+  console.log("retrun",returnCampaignDetailList)
   if (returnCampaignDetailList.status == 'Waiting') {
 
     return (
@@ -126,7 +127,9 @@ function ChoiceInfluencer(props) {
             <div className="current-user-container" style={{ marginTop: "85px" }}>
 
               <div>
-
+                 <picture className="user-picture">
+                    <img src={returnCampaignDetailList.uploadedDoc} alt={"logo brand"} />
+                 </picture>
 
                 <div className="current-user-info">
 

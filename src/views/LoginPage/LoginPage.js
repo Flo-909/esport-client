@@ -1,5 +1,5 @@
-import React , { useState, useEffect } from "react";
-import {Link, Redirect} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { Link, Redirect } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,66 +21,55 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/signup.jpg";
-import { connect } from 'react-redux'
-
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(styles);
 
-
-
 function LoginPage(props) {
+  const [signInEmail, setSignInEmail] = useState("");
+  const [signInPassword, setSignInPassword] = useState("");
+  const [userExists, setUserExists] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const [roleState, setRoleState] = useState("");
+  const [listErrorsSignIn, setErrorsSignIn] = useState([]);
 
-  const [signInEmail, setSignInEmail] = useState('')
-  const [signInPassword, setSignInPassword] = useState('')
-  const [userExists, setUserExists] = useState(false)
-  const [redirect, setRedirect] = useState(false)
-  const [roleState, setRoleState]= useState('')
-  const [listErrorsSignIn, setErrorsSignIn] = useState([])
-
- 
- 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function() {
+  setTimeout(function () {
     setCardAnimation("");
   }, 700);
-
-
 
   const classes = useStyles();
   const { ...rest } = props;
 
-
   var handleSubmitSignIn = async () => {
- 
-    const data = await fetch(process.env.REACT_APP_BACKEND + '/sign-in', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}`
-    })
+    const data = await fetch(process.env.REACT_APP_BACKEND + "/sign-in", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}`,
+    });
 
-    const body = await data.json()
-    console.log(body)
-  
-   
+    const body = await data.json();
+    console.log(body);
 
-    if(body.result == true){
-      props.addToken(body.token)
-      setUserExists(true)
-      setRoleState(body.user.role)
-    }  else {
-      setErrorsSignIn(body.error)
+    if (body.result == true) {
+      props.addToken(body.token);
+      props.addRole(body.user.role);
+      setUserExists(true);
+      setRoleState(body.user.role);
+    } else {
+      setErrorsSignIn(body.error);
     }
+  };
+
+  if (roleState == "brand") {
+    return <Redirect to="/choiceinfluencer" />;
+  } else if (roleState == "influenceur") {
+    return <Redirect to="/select-campaign" />;
   }
 
-  if(roleState == 'brand'){
-    return <Redirect to='/choiceinfluencer' />
-  } else if (roleState == 'influenceur'){
-    return <Redirect to='/select-campaign' />
-  }
-
-  var tabErrorsSignin = listErrorsSignIn.map((error,i) => {
-    return(<p>{error}</p>)
-  })
+  var tabErrorsSignin = listErrorsSignIn.map((error, i) => {
+    return <p>{error}</p>;
+  });
 
   return (
     <div>
@@ -95,71 +84,73 @@ function LoginPage(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url("+ image +")",
+          backgroundImage: "url(" + image + ")",
           backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundPosition: "top center",
         }}
       >
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
-              <Card className={classes[cardAnimaton]} style={{backgroundColor: "transparent", color:"white"}}>
+              <Card
+                className={classes[cardAnimaton]}
+                style={{ backgroundColor: "transparent", color: "white" }}
+              >
                 <form className={classes.form}>
                   <CardBody>
-                  <CustomInput
+                    <CustomInput
                       inputProps={{
                         onChange: (e) => setSignInEmail(e.target.value),
-                        type:'email'
-
+                        type: "email",
                       }}
                       labelText="Email*"
                       id="Email"
-
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
-                
+
                     <CustomInput
                       inputProps={{
                         onChange: (e) => setSignInPassword(e.target.value),
-                        type:"password"
-
+                        type: "password",
                       }}
                       labelText="password*"
                       id="password"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                     />
                     {tabErrorsSignin}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button onClick={() => handleSubmitSignIn()} variant="contained" color="primary" size="lg">
+                    <Button
+                      onClick={() => handleSubmitSignIn()}
+                      variant="contained"
+                      color="primary"
+                      size="lg"
+                    >
                       CONNEXION
                     </Button>
                   </CardFooter>
                 </form>
               </Card>
-
             </GridItem>
           </GridContainer>
         </div>
       </div>
-
-
     </div>
   );
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
-    addToken: function(token){
-      dispatch({type: 'addToken', token: token})
-    }
-  }
+    addToken: function (token) {
+      dispatch({ type: "addToken", token: token });
+    },
+    addRole: function (role) {
+      dispatch({ type: "addRole", role: role });
+    },
+  };
 }
-export default connect(
-  null,
-  mapDispatchToProps
-)(LoginPage)
+export default connect(null, mapDispatchToProps)(LoginPage);

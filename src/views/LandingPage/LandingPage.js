@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, Redirect,useParams} from 'react-router-dom'
+import { Link, Redirect, useParams } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -20,14 +20,14 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import ProductSection from "./Sections/ProductSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
-const dashboardRoutes = []; 
+const dashboardRoutes = [];
 const useStyles = makeStyles(styles);
 
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   return (
-    <div>   
+    <div>
       <Header
         color="transparent"
         routes={dashboardRoutes}
@@ -36,18 +36,23 @@ export default function LandingPage(props) {
         fixed
         changeColorOnScroll={{
           height: 400,
-          color: "dark"
+          color: "dark",
         }}
         {...rest}
-      /> 
+      />
       <Parallax filter image={require("assets/img/esport-Home.jpg")}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Start your eSport<br />  adventure now</h1>
+              <h1 className={classes.title}>
+                Start your eSport
+                <br /> adventure now
+              </h1>
               <h4>
-               We are the leader of Influence Marketing in the Gaming Sector.<br /> 
-               Let eSport-Influence support you and bring your Influence Marketing to the next level!
+                We are the leader of Influence Marketing in the Gaming Sector.
+                <br />
+                Let eSport-Influence support you and bring your Influence
+                Marketing to the next level!
               </h4>
               <br />
               <Button

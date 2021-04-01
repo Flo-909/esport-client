@@ -10,7 +10,6 @@ import profile from "assets/img/coca-logo.png";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { influencerUsers } from "./Influencer-list";
 
-
 export default function ProfilePage(props) {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
@@ -30,7 +29,7 @@ export default function ProfilePage(props) {
         fixed
         changeColorOnScroll={{
           height: 200,
-          color: "dark"
+          color: "dark",
         }}
         {...rest}
       />
@@ -52,29 +51,36 @@ export default function ProfilePage(props) {
             </GridContainer>
             <div className={classes.description}>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pharetra, neque ut aliquet sagittis, est massa facilisis elit, ac tristique velit elit non dolor. In quam metus, aliquet sed ex sed, tempor ultricies dolor. Praesent in scelerisque neque. Phasellus vel diam quis mi porttitor fringilla.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Maecenas pharetra, neque ut aliquet sagittis, est massa
+                facilisis elit, ac tristique velit elit non dolor. In quam
+                metus, aliquet sed ex sed, tempor ultricies dolor. Praesent in
+                scelerisque neque. Phasellus vel diam quis mi porttitor
+                fringilla.
               </p>
             </div>
-            <div className="users-containers" style={{marginTop: "30px"}}>
-            <ul>
-                { influencerUsers.map(user =>   
-                <li key={user.id} className="user">                  
-                <picture className="user-picture">
-                <img src={user.photoUrl} alt={`${user.name}`} />
-                </picture>
-                <div className="user-info-container">
-                <div className="user-info">
-                    <h4>{user.name}</h4>
-                    <p>{user.info}</p>                    
-                </div>
-                <div className="user-action">
-                  <button onClick={(userId) => this.handleClick(user.id)}>Message</button>
-                </div>
-                </div>
-                </li>
-                )}
-            </ul>
-        </div>
+            <div className="users-containers" style={{ marginTop: "30px" }}>
+              <ul>
+                {influencerUsers.map((user) => (
+                  <li key={user.id} className="user">
+                    <picture className="user-picture">
+                      <img src={user.photoUrl} alt={`${user.name}`} />
+                    </picture>
+                    <div className="user-info-container">
+                      <div className="user-info">
+                        <h4>{user.name}</h4>
+                        <p>{user.info}</p>
+                      </div>
+                      <div className="user-action">
+                        <button onClick={(userId) => this.handleClick(user.id)}>
+                          Message
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

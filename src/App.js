@@ -31,58 +31,30 @@ const App = ({ token, role }) => {
     if (token && role === "influenceur") {
       return (
         <Switch>
-          <Route path="/login-page" exact component={LoginPage} />
           <Route path="/sign-up/brand" exact component={SignUpBrand} />
           <Route
             path="/sign-up/influencer"
             exact
             component={SignUpInfluencer}
           />
-          <Route exact path="/">
-            {token && role === "influenceur" ? (
-              <Redirect to="/select-campaign" />
-            ) : (
-              <Redirect to="/" />
-            )}
-          </Route>
-          <Route path="/" exact component={LandingPage} />
+          <Route path="/" exact component={ProfileInfluencer} />
           <Route path="/mynetwork" exact component={MyNetwork} />
           <Route path="/messaging" exact component={Messaging} />
           <Route path="/login-messagerie" exact component={Login} />
 
-          {token && role === "influenceur" ? (
-            <Route
-              path="/profile-influencer"
-              exact
-              component={ProfileInfluencer}
-            />
-          ) : (
-            <Redirect to="/" />
-          )}
-          {token && role === "influenceur" ? (
-            <Route path="/select-campaign" exact component={SelectCampagne} />
-          ) : (
-            <Redirect to="/" />
-          )}
-          {token && role === "influenceur" ? (
-            <Route path="/campaign-apply/:id" exact component={CampaignApply} />
-          ) : (
-            <Redirect to="/" />
-          )}
-          {token && role === "influenceur" ? (
-            <Route
-              path="/request-influencer-list"
-              exact
-              component={RequestInfluencer}
-            />
-          ) : (
-            <Redirect to="/" />
-          )}
-          {token && role === "influenceur" ? (
-            <Route path="/" exact component={ProfileInfluencer} />
-          ) : (
-            <Redirect to="/" />
-          )}
+          <Route
+            path="/profile-influencer"
+            exact
+            component={ProfileInfluencer}
+          />
+
+          <Route path="/select-campaign" exact component={SelectCampagne} />
+          <Route path="/campaign-apply/:id" exact component={CampaignApply} />
+          <Route
+            path="/request-influencer-list"
+            exact
+            component={RequestInfluencer}
+          />
           <Route
             path="/profile-influencer"
             exact
@@ -95,36 +67,27 @@ const App = ({ token, role }) => {
             exact
             component={RequestInfluencer}
           />
-          <Route exact path="/">
-            {token && role === "influenceur" ? (
-              <Redirect to="/select-campaign" />
-            ) : (
-              <Redirect to="/login-page" />
-            )}
-          </Route>
+          <Route path="/login-page" exact component={LoginPage} />
+          <Redirect to="/" />
         </Switch>
       );
     } else if (token && role === "brand") {
       return (
         <Switch>
+          <Route path="/" exact component={CreateCampaign} />
           <Route path="/create-campaign" exact component={CreateCampaign} />
           <Route path="/mycampaign" exact component={MyCampaign} />
           <Route path="/profile-brand" exact component={ProfileBrand} />
           <Route path="/select-influencer" exact component={SelectInfluencer} />
           <Route path="/choiceinfluencer" exact component={ChoiceInfluencer} />
-          //{" "}
+          <Route path="/login-page" exact component={LoginPage} />
+          <Redirect to="/" />
         </Switch>
       );
     } else {
       return (
         <Switch>
-          <Route exact path="/select-campaign">
-            {!token && !role ? (
-              <Redirect to="/login-page" />
-            ) : (
-              <Redirect to="/login-page" />
-            )}
-          </Route>
+          <Route path="/" exact component={LandingPage} />
           <Route path="/login-page" exact component={LoginPage} />
           <Route path="/sign-up/brand" exact component={SignUpBrand} />
           <Route
@@ -132,10 +95,10 @@ const App = ({ token, role }) => {
             exact
             component={SignUpInfluencer}
           />
-          <Route path="/" exact component={LandingPage} />
           <Route path="/mynetwork" exact component={MyNetwork} />
           <Route path="/messaging" exact component={Messaging} />
           <Route path="/login-messagerie" exact component={Login} />
+          <Redirect to="/" />
         </Switch>
       );
     }

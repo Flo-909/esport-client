@@ -25,12 +25,15 @@ const HeaderLinksInfluencer = (props) => {
   const [redirect, setRedirect] = useState(false);
 
   const classes = useStyles();
+
   const handleLogout = () => {
+    console.log("handleLogout");
     props.removeToken(null);
     props.removeRole(null);
     setRedirect(true);
-    console.log("redirect", Redirect)
+    console.log("redirect", Redirect);
   };
+
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -50,12 +53,10 @@ const HeaderLinksInfluencer = (props) => {
         </Link>
       </ListItem>
 
-      <ListItem className={classes.listItem}>
-        <Button onClick={() => handleLogout()} color="primary">
-          Log-out{" "}
-        </Button>
+      <ListItem className={classes.listItem} onClick={() => handleLogout()}>
+        <Button color="primary">Log-out </Button>
       </ListItem>
-      {redirect ? <Redirect to="login-page" /> : null}
+      {redirect ? <Redirect to="/login-page" /> : null}
     </List>
   );
 };

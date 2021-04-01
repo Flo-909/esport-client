@@ -41,7 +41,6 @@
     "react-swipeable-views": "0.13.9",
     "reactstrap": "^8.7.1",
     "redux": "^4.0.5",
-    "restful-react": "^15.2.0",
     "talkjs": "^0.14.3"
   },
   "devDependencies": {

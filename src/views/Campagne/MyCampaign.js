@@ -4,7 +4,7 @@ import Header from "components/Header/Header.js";
 import HeaderLinksBrand from "components/Header/HeaderLinksBrand.js";
 import { Row } from "reactstrap";
 import { connect } from "react-redux";
-import MyCampaignList from "./MyCampaignList";
+import MyCampaignList from "./mycampaignList";
 import image from "assets/img/signup.jpg";
 
 function MyCampaign(props) {

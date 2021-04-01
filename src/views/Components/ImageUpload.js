@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import { useMutate } from "restful-react";
 import axios from "axios";
 
 const ImageUpload = () => {
   const [selectedImage, setSelectedImage] = useState();
-  const { mutate: uploadImage } = useMutate({
-    verb: "POST",
-    path: process.env.REACT_APP_BACKEND + "/image-upload",
-  });
 
   const handleChange = async (event) => {
     console.log("handleChange", event.target);
@@ -15,23 +10,15 @@ const ImageUpload = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log("e", e);
     e.preventDefault();
     if (!selectedImage) {
       return;
     }
 
     const formData = new FormData();
-
     formData.append("image", selectedImage);
     console.log(formData.get("image"));
-
-    uploadImage(formData)
-      .then((uploadedImage) => {
-        console.log(uploadedImage);
-      })
-      .catch((e) => {
-        console.log("Oooops, something went wrong!", e);
-      });
 
     axios
       .post(process.env.REACT_APP_BACKEND + "/image-upload", formData, {
@@ -49,8 +36,8 @@ const ImageUpload = () => {
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <input
-        // accept="image/*"
         onChange={handleChange}
+        name="file"
         accept=".jpg, .png, .jpeg"
         type="file"
         placeholder="upload image"

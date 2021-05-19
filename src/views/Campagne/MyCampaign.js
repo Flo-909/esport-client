@@ -4,7 +4,7 @@ import Header from "components/Header/Header.js";
 import HeaderLinksBrand from "components/Header/HeaderLinksBrand.js";
 import { Row } from "reactstrap";
 import { connect } from "react-redux";
-import MyCampaignList from "./MyCampaignList";
+import CampaignList from "./MyCampaignList.js";
 import image from "assets/img/signup.jpg";
 
 function MyCampaign(props) {
@@ -27,7 +27,7 @@ function MyCampaign(props) {
 
   const returnList = myCampaignList.map((mycampaign, i) => {
     return (
-      <MyCampaignList
+      <CampaignList
         key={i}
         campaignName={mycampaign.campaignName}
         campaignDesc={mycampaign.description}

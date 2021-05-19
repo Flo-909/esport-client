@@ -9,6 +9,7 @@ const styles = {
 };
 
 const useStyles = makeStyles(styles);
+
 function MyCampaignList(props) {
   const classes = useStyles();
 

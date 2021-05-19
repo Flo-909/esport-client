@@ -16,7 +16,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-
+import ImageUpload from "views/Components/ImageUpload";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import CardHeader from "components/Card/CardHeader";
 import TextField from "@material-ui/core/TextField";
@@ -33,28 +33,27 @@ function SignUpBrand(props) {
   const [signUpFirstName, setSignUpFirstName] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
-  const [signUpCompany, setSignUpCompagny] = useState("");
+  const [signUpCompany, setSignUpCompany] = useState("");
   const [signUpLastName, setSignUpLastName] = useState("");
   const [signUpPhone, setSignUpPhone] = useState("");
 
   const [listErrorsSignup, setErrorsSignup] = useState([]);
   const [userExists, setUserExists] = useState(false);
   const [redirect, setRedirect] = useState(false);
-
+  const [imageUpload, setImageUpload] = useState("");
   const handleSubmitSignupCompany = async () => {
-    console.log("HELLO WORLD");
 
     const data = await fetch(process.env.REACT_APP_BACKEND + "/sign-up/brand", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `companyFromFront=${signUpCompany}&firstNameFromFront=${signUpFirstName}&lastNameFromFront=${signUpLastName}&emailFromFront=${signUpEmail}&phoneFromFront=${signUpPhone}&passwordFromFront=${signUpPassword}`,
+      body: `companyFromFront=${signUpCompany}&firstNameFromFront=${signUpFirstName}&imageUploadFromFront=${imageUpload}&lastNameFromFront=${signUpLastName}&emailFromFront=${signUpEmail}&phoneFromFront=${signUpPhone}&passwordFromFront=${signUpPassword}`,
     });
-    console.log(data.body + "HELLO WORLD");
 
     const body = await data.json();
 
     if (body.result == true) {
       props.addToken(body.token);
+      props.addRole(body.saveUser.role);
       setUserExists(true);
       setRedirect(true);
     } else {
@@ -107,7 +106,7 @@ function SignUpBrand(props) {
                   <CardBody>
                     <CustomInput
                       inputProps={{
-                        onChange: (e) => setSignUpCompagny(e.target.value),
+                        onChange: (e) => setSignUpCompany(e.target.value),
                       }}
                       labelText="Company*"
                       id="company"
@@ -149,7 +148,8 @@ function SignUpBrand(props) {
                         fullWidth: true,
                       }}
                     />
-
+                    <ImageUpload getImageUrl={setImageUpload}/>
+                    
                     <CustomInput
                       inputProps={{
                         onChange: (e) => setSignUpPhone(e.target.value),
@@ -199,6 +199,9 @@ function mapDispatchToProps(dispatch) {
   return {
     addToken: function (token) {
       dispatch({ type: "addToken", token: token });
+    },
+    addRole: function (role) {
+      dispatch({ type: "addRole", role: role });
     },
   };
 }

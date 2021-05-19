@@ -32,7 +32,7 @@ function ProfileBrandPage(props) {
           `/branddetails?brandToken=${props.token}`
       );
       const jsonResponse = await response.json();
-
+        console.log("jsonResponse", jsonResponse)
       setCompanyDetails(jsonResponse.brandProfil);
     }
     fetchData();
@@ -68,8 +68,8 @@ function ProfileBrandPage(props) {
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
-                  <div>
-                    <img src={profile} alt="..." className={imageClasses} />
+                <div>
+                    <img src={companyDetails.imageUpload} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{companyDetails.company}</h3>

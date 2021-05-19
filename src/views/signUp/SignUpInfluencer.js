@@ -19,7 +19,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import TextField from "@material-ui/core/TextField";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import CardHeader from "components/Card/CardHeader";
-
+import ImageUpload from "views/Components/ImageUpload";
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 
@@ -80,6 +80,7 @@ function SignUpInfluencer(props) {
   const [listErrorsSignup, setErrorsSignup] = useState([]);
   const [userExists, setUserExists] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [imageUpload, setImageUpload] = useState("");
 
   const handleSubmitSignupInfluencer = async () => {
     console.log("HELLO WORLD");
@@ -89,7 +90,7 @@ function SignUpInfluencer(props) {
       {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `userNameFromFront=${signUpUserNameInfluencer}&firstNameFromFront=${signUpFirstName}&lastNameFromFront=${signUpLastName}&emailFromFront=${signUpEmail}&bioFromFront=${bioInfluencer}&phoneFromFront=${signUpPhone}&passwordFromFront=${signUpPassword}&numberFollowerFromFront=${signUpFollowerInfluencer}&favoriteGameFromFront=${signUpFavoriteGamesInfluencer}&urlSocialNetworkFromFront=${signUpUrlSocialNetworkInfluencer}`,
+        body: `userNameFromFront=${signUpUserNameInfluencer}&firstNameFromFront=${signUpFirstName}&lastNameFromFront=${signUpLastName}&imageUploadFromFront=${imageUpload}&emailFromFront=${signUpEmail}&bioFromFront=${bioInfluencer}&phoneFromFront=${signUpPhone}&passwordFromFront=${signUpPassword}&numberFollowerFromFront=${signUpFollowerInfluencer}&favoriteGameFromFront=${signUpFavoriteGamesInfluencer}&urlSocialNetworkFromFront=${signUpUrlSocialNetworkInfluencer}`,
       }
     );
     console.log(data.body + "HELLO WORLD");
@@ -98,6 +99,7 @@ function SignUpInfluencer(props) {
 
     if (body.result == true) {
       props.addToken(body.token);
+      props.addRole(body.saveUser.role);
       setUserExists(true);
       setRedirect(true);
     } else {
@@ -248,7 +250,9 @@ function SignUpInfluencer(props) {
                       }}
                     />
 
-                    <CustomInput
+                    <ImageUpload getImageUrl={setImageUpload}/>
+                    
+                      <CustomInput
                       inputProps={{
                         onChange: (e) =>
                           setSignUpFavoriteGamesInfluencer(e.target.value),
@@ -275,6 +279,7 @@ function SignUpInfluencer(props) {
                   </CardBody>
 
                   <CardFooter className={classes.cardFooter}>
+                    
                     <Button
                       onClick={() => handleSubmitSignupInfluencer()}
                       variant="contained"
@@ -290,7 +295,7 @@ function SignUpInfluencer(props) {
           </GridContainer>
         </div>
       </div>
-      {redirect ? <Redirect to="/request-influencer-list" /> : null}
+      {redirect ? <Redirect to="/select-campaign" /> : null}
     </div>
   );
 }
@@ -299,6 +304,9 @@ function mapDispatchToProps(dispatch) {
   return {
     addToken: function (token) {
       dispatch({ type: "addToken", token: token });
+    },
+    addRole: function (role) {
+      dispatch({ type: "addRole", role: role });
     },
   };
 }

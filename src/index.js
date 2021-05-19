@@ -15,8 +15,6 @@ import App from "./App";
 
 const store = createStore(combineReducers({ token, campaign, role }));
 
-console.log("process.env.REACT_APP_BACKEND", process.env.REACT_APP_BACKEND);
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

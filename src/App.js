@@ -25,29 +25,15 @@ import MyCampaign from "views/Campagne/MyCampaign.js";
 const hist = createBrowserHistory();
 
 const App = ({ token, role }) => {
-  console.log("APP token", token);
-
+  
   const RenderRoute = () => {
     if (token && role === "influenceur") {
       return (
         <Switch>
-          <Route path="/sign-up/brand" exact component={SignUpBrand} />
-          <Route
-            path="/sign-up/influencer"
-            exact
-            component={SignUpInfluencer}
-          />
           <Route path="/" exact component={ProfileInfluencer} />
-          <Route path="/mynetwork" exact component={MyNetwork} />
-          <Route path="/messaging" exact component={Messaging} />
-          <Route path="/login-messagerie" exact component={Login} />
-
-          <Route
-            path="/profile-influencer"
-            exact
-            component={ProfileInfluencer}
-          />
-
+          <Route path="/sign-up/influencer" exact component={SignUpInfluencer} />
+          <Route path="/profile-influencer" exact component={ProfileInfluencer}/>
+          <Route path="/sign-up/brand" exact component={SignUpBrand} />
           <Route path="/select-campaign" exact component={SelectCampagne} />
           <Route path="/campaign-apply/:id" exact component={CampaignApply} />
           <Route
@@ -95,9 +81,6 @@ const App = ({ token, role }) => {
             exact
             component={SignUpInfluencer}
           />
-          <Route path="/mynetwork" exact component={MyNetwork} />
-          <Route path="/messaging" exact component={Messaging} />
-          <Route path="/login-messagerie" exact component={Login} />
           <Redirect to="/" />
         </Switch>
       );

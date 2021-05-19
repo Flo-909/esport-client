@@ -75,54 +75,28 @@ const themeStyles = makeStyles((theme) => ({
 }));
 
 function CreateCampaign(props) {
-  // 'Controlled'
-  // GLOBAL STATE
   const [nameCampaign, setNameCampaign] = useState("");
   const [description, setDescription] = useState("Controlled");
   const [audienceMin, setAudienceMin] = React.useState("");
   const [audienceMax, setAudienceMax] = React.useState("");
-  const [uploadDoc, setUploadDoc] = useState("");
   const [dateStart, setStartDate] = useState(new Date());
   const [dateEnd, setEndDate] = useState(new Date());
   const [redirect, setRedirect] = useState(false);
   const [campaignImage, setCampaignImage] = useState("");
+  const [imageURL, setImageURL] = useState(undefined);
 
-  const url = process.env.REACT_APP_API_BASE_URL;
-  console.log("url", url);
-  const preset = process.env.REACT_APP_UPLOAD_PRESET;
-  console.log("preset", preset);
 
-  var handleSubmitCampaign = async () => {
-    // const formData = new FormData();
-    // console.log("campaignimage", campaignImage);
-    // formData.append("file", campaignImage);
-    // formData.append("upload_preset", preset);
-    // try {
-    //   console.log("campaignimage", campaignImage);
-    //   console.log("formData", formData);
-    //   const res = await axios.post(url, formData);
-    //   console.log("res", res);
-    //   const imageUrl = res.data.secure_url;
-    //   const campaignImage = await axios.post(
-    //     process.env.REACT_APP_API_BASE_URL,
-    //     {
-    //       imageUrl,
-    //     }
-    //   );
-    //   setCampaignImage(campaignImage.data);
-    // } catch (err) {
-    //   console.error(err);
-    // }
+
+  const handleSubmitCampaign = async () => {
     const data = await fetch(process.env.REACT_APP_BACKEND + "/addcampaign", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `nameCampaignFromFront=${nameCampaign}&dateStartFromFront=${dateStart}&dateEndFromFront=${dateEnd}&descriptionFromFront=${description}&audienceMinFromFront=${audienceMin}&audienceMaxFromFront=${audienceMax}&uploadDocFromFront=${uploadDoc}&token=${props.token}`,
+      body: `nameCampaignFromFront=${nameCampaign}&uploadDocFromFront=${imageURL}&dateStartFromFront=${dateStart}&dateEndFromFront=${dateEnd}&descriptionFromFront=${description}&audienceMinFromFront=${audienceMin}&audienceMaxFromFront=${audienceMax}&token=${props.token}`,
     });
     const body = await data.json();
     if (body.campaignSave) {
       props.addToCampaignList(body.token);
       setRedirect(true);
-      // console.log('boy.rcampaignSave', body.campaignSave)
     } else {
       setRedirect(false);
     }
@@ -187,6 +161,8 @@ function CreateCampaign(props) {
     // setCampaignImage(e.target.files[0]);
   };
 
+  console.log("imageURL", imageURL)
+  
   return (
     <div>
       <Header
@@ -330,37 +306,18 @@ function CreateCampaign(props) {
                       className={themeClasses.root}
                       style={{ marginBottom: "80px" }}
                     >
-                      <ImageUpload />
-
-                      {/* <input
-                        onChange={onChange}
-                        // onChange={(e) => setCampaignImage(e.target)}
-                        accept="image/*"
-                        className={classes.input}
-                        style={{ display: "none" }}
-                        id="raised-button-file"
-                        multiple
-                        type="file"
-                      /> */}
-                      {/* <label htmlFor="raised-button-file">
-                        <Button
-                          variant="raised"
-                          component="span"
-                          className={classes.button}
-                        >
-                          Upload
-                        </Button>
-                      </label> */}
+                      <ImageUpload getImageUrl={setImageURL}/>
                     </div>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button
+                    {imageURL ? <Button
                       onClick={() => handleSubmitCampaign()}
                       color="primary"
                       size="lg"
-                    >
+                    > 
                       Confirm
                     </Button>
+                    : <p>Please upload file before submittting</p> }
                   </CardFooter>
                 </form>
               </Card>

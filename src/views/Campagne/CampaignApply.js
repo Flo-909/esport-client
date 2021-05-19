@@ -38,7 +38,7 @@ function CampaignApply(props) {
   const [redirect, setRedirect] = useState(false);
   const [campaignDetails, setCampaignDetails] = useState([]);
   const params = useParams();
-  console.log("props.token", props.token);
+  
 
   useEffect(() => {
     async function getCampaign() {
@@ -46,7 +46,6 @@ function CampaignApply(props) {
         process.env.REACT_APP_BACKEND + "/get-campaign-details/" + params.id
       );
       const jsonResponse = await response.json();
-      console.log("jsonR", jsonResponse);
       setCampaignDetails(jsonResponse.returnCampaign);
     }
     getCampaign();

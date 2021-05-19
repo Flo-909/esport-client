@@ -8,12 +8,14 @@ import WorkIcon from "@material-ui/icons/Work";
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import Button from "components/CustomButtons/Button.js";
+import CardFooter from "components/Card/CardFooter.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import TextField from "@material-ui/core/TextField";
 import HeaderLinksInfluencer from "components/Header/HeaderLinksInfluencer";
+import ImageUpload from "views/Components/ImageUpload";
 import profile from "assets/img/faces/christian.jpg";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { connect } from "react-redux";
@@ -30,10 +32,11 @@ function ProfilePage(props) {
           `/influencerdetails?influencerToken=${props.token}`
       );
       const jsonResponse = await response.json();
-
+      console.log("jsonResponse", jsonResponse)
       setInfluencerDetails(jsonResponse.influencerProfil);
     }
     fetchData();
+    
   }, []);
 
   const classes = useStyles();
@@ -67,7 +70,7 @@ function ProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={profile} alt="..." className={imageClasses} />
+                    <img src={influencerDetails.imageUpload} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>

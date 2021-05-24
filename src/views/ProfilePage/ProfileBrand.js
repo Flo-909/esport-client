@@ -70,11 +70,11 @@ function ProfileBrandPage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    {/* <img
+                    <img
                       src={companyDetails.imageUpload}
                       alt="..."
                       className={imageClasses}
-                    /> */}
+                    />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{companyDetails.company}</h3>

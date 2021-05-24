@@ -227,7 +227,7 @@ function SignUpInfluencer(props) {
                       autoComplete="off"
                     >
                       <TextField
-                        style={{ marginRight: "60px" }}
+                        style={{ marginRight: "100px" }}
                         inputProps={{
                           onChange: (e) => setBioInfluencer(e.target.value),
                         }}

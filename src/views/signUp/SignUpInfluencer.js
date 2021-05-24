@@ -250,9 +250,9 @@ function SignUpInfluencer(props) {
                       }}
                     />
 
-                    <ImageUpload getImageUrl={setImageUpload}/>
-                    
-                      <CustomInput
+                    <ImageUpload getImageUrl={setImageUpload} />
+
+                    <CustomInput
                       inputProps={{
                         onChange: (e) =>
                           setSignUpFavoriteGamesInfluencer(e.target.value),
@@ -279,15 +279,18 @@ function SignUpInfluencer(props) {
                   </CardBody>
 
                   <CardFooter className={classes.cardFooter}>
-                    
-                    <Button
-                      onClick={() => handleSubmitSignupInfluencer()}
-                      variant="contained"
-                      color="primary"
-                      size="lg"
-                    >
-                      Sign up
-                    </Button>
+                    {imageUpload ? (
+                      <Button
+                        onClick={() => handleSubmitSignupInfluencer()}
+                        variant="contained"
+                        color="primary"
+                        size="lg"
+                      >
+                        Sign up
+                      </Button>
+                    ) : (
+                      <p>Please upload your image before submitting</p>
+                    )}
                   </CardFooter>
                 </form>
               </Card>

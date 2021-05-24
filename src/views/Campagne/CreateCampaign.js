@@ -85,8 +85,6 @@ function CreateCampaign(props) {
   const [campaignImage, setCampaignImage] = useState("");
   const [imageURL, setImageURL] = useState(undefined);
 
-
-
   const handleSubmitCampaign = async () => {
     const data = await fetch(process.env.REACT_APP_BACKEND + "/addcampaign", {
       method: "POST",
@@ -161,8 +159,8 @@ function CreateCampaign(props) {
     // setCampaignImage(e.target.files[0]);
   };
 
-  console.log("imageURL", imageURL)
-  
+  console.log("imageURL", imageURL);
+
   return (
     <div>
       <Header
@@ -306,18 +304,21 @@ function CreateCampaign(props) {
                       className={themeClasses.root}
                       style={{ marginBottom: "80px" }}
                     >
-                      <ImageUpload getImageUrl={setImageURL}/>
+                      <ImageUpload getImageUrl={setImageURL} />
                     </div>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    {imageURL ? <Button
-                      onClick={() => handleSubmitCampaign()}
-                      color="primary"
-                      size="lg"
-                    > 
-                      Confirm
-                    </Button>
-                    : <p>Please upload file before submittting</p> }
+                    {imageURL ? (
+                      <Button
+                        onClick={() => handleSubmitCampaign()}
+                        color="primary"
+                        size="lg"
+                      >
+                        Confirm
+                      </Button>
+                    ) : (
+                      <p>Please upload your image before submitting</p>
+                    )}
                   </CardFooter>
                 </form>
               </Card>

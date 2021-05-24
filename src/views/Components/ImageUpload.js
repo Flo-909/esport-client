@@ -27,6 +27,7 @@ const ImageUpload = ({getImageUrl}) => {
       })
       .then((res) => {
         getImageUrl(res.data.resultCloudinary.secure_url)
+        console.log("res.data", res.data)
       })
       .catch((error) => console.error(error));
   };

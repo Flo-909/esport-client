@@ -20,6 +20,7 @@ import HeaderLinksBrand from "components/Header/HeaderLinksBrand";
 import { connect } from "react-redux";
 import profile from "assets/img/logo-company.png";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
+import ImageUpload from "views/Components/ImageUpload";
 import "./App.css";
 
 function ProfileBrandPage(props) {
@@ -32,7 +33,7 @@ function ProfileBrandPage(props) {
           `/branddetails?brandToken=${props.token}`
       );
       const jsonResponse = await response.json();
-        console.log("jsonResponse", jsonResponse)
+      console.log("jsonResponse", jsonResponse);
       setCompanyDetails(jsonResponse.brandProfil);
     }
     fetchData();
@@ -68,8 +69,12 @@ function ProfileBrandPage(props) {
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
-                <div>
-                    <img src={companyDetails.imageUpload} alt="..." className={imageClasses} />
+                  <div>
+                    {/* <img
+                      src={companyDetails.imageUpload}
+                      alt="..."
+                      className={imageClasses}
+                    /> */}
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{companyDetails.company}</h3>

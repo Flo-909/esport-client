@@ -42,7 +42,6 @@ function SignUpBrand(props) {
   const [redirect, setRedirect] = useState(false);
   const [imageUpload, setImageUpload] = useState("");
   const handleSubmitSignupCompany = async () => {
-
     const data = await fetch(process.env.REACT_APP_BACKEND + "/sign-up/brand", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -148,8 +147,8 @@ function SignUpBrand(props) {
                         fullWidth: true,
                       }}
                     />
-                    <ImageUpload getImageUrl={setImageUpload}/>
-                    
+                    <ImageUpload getImageUrl={setImageUpload} />
+
                     <CustomInput
                       inputProps={{
                         onChange: (e) => setSignUpPhone(e.target.value),
@@ -175,14 +174,18 @@ function SignUpBrand(props) {
                   </CardBody>
 
                   <CardFooter className={classes.cardFooter}>
-                    <Button
-                      onClick={() => handleSubmitSignupCompany()}
-                      variant="contained"
-                      color="primary"
-                      size="lg"
-                    >
-                      Sign up
-                    </Button>
+                    {imageUpload ? (
+                      <Button
+                        onClick={() => handleSubmitSignupCompany()}
+                        variant="contained"
+                        color="primary"
+                        size="lg"
+                      >
+                        Sign up
+                      </Button>
+                    ) : (
+                      <p>Please upload your image before submitting</p>
+                    )}
                   </CardFooter>
                 </form>
               </Card>

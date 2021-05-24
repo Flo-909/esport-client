@@ -32,11 +32,10 @@ function ProfilePage(props) {
           `/influencerdetails?influencerToken=${props.token}`
       );
       const jsonResponse = await response.json();
-      console.log("jsonResponse", jsonResponse)
+      console.log("jsonResponse", jsonResponse);
       setInfluencerDetails(jsonResponse.influencerProfil);
     }
     fetchData();
-    
   }, []);
 
   const classes = useStyles();
@@ -70,7 +69,11 @@ function ProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={influencerDetails.imageUpload} alt="..." className={imageClasses} />
+                    <img
+                      src={influencerDetails.imageUpload}
+                      alt="..."
+                      className={imageClasses}
+                    />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>
